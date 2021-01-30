@@ -1,0 +1,58 @@
+{
+  "name": "solid-quill",
+  "version": "0.0.0",
+  "description": "The Quill rich-text editor as a React component.",
+  "license": "MIT",
+  "author": {
+    "email": "amoutonbrady@gmail.com",
+    "name": "Alexandre Mouton-Brady",
+    "url": "https://amoutonbrady.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amoutonbrady/solid-quill.git"
+  },
+  "main": "./dist/solid-quill.cjs.js",
+  "module": "./dist/solid-quill.es.js",
+  "solid": "./dist/solid-quill.jsx",
+  "types": "./dist/solid-quill.d.ts",
+  "exports": {
+    ".": {
+      "solid": "./dist/solid-quill.jsx",
+      "import": "./dist/solid-quill.es.js",
+      "require": "./dist/solid-quill.cjs.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "check": "package-check"
+  },
+  "keywords": [
+    "solid",
+    "solidjs",
+    "solid-js",
+    "quill",
+    "wysiwyg",
+    "editor"
+  ],
+  "peerDependencies": {
+    "quill": "^1.3",
+    "solid-js": "^0.23"
+  },
+  "dependencies": {
+    "quill": "^1.3.7",
+    "solid-js": "^0.23.11"
+  },
+  "devDependencies": {
+    "@skypack/package-check": "^0.2.2",
+    "@types/node": "^14.14.22",
+    "@types/quill": "^2.0.4",
+    "typescript": "^4.2.0-beta",
+    "vite": "^2.0.0-beta.59",
+    "vite-plugin-solid": "^0.7.0"
+  }
+}
