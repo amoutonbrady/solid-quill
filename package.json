@@ -29,6 +29,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm check && pnpm build",
     "check": "package-check"
   },
   "keywords": [
