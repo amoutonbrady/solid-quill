@@ -9,6 +9,7 @@
     "moduleResolution": "Node",
     "outDir": "dist",
     "declaration": true,
+    "sourceMap": true,
     "types": ["vite/client"]
   }
 }
