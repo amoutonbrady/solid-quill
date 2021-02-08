@@ -6,14 +6,7 @@ import { SolidQuill } from "./solid-quill";
 
 function App() {
   let q: Quill;
-
-  const init = (quill: Quill) => {
-    console.log(q);
-    console.log(quill);
-    console.assert(q.getText() === quill.getText());
-  };
-
-  return <SolidQuill onReady={init} ref={q} />;
+  return <SolidQuill ref={q} onTextChange={() => console.log(q.getText())} />;
 }
 
 const dispose = render(App, document.getElementById("app"));

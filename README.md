@@ -26,19 +26,19 @@ This package leaves the whole state management to quill internals and therefore 
 
 Initially, I would like to avoid being put in that situation and delegating to quill everything state related. You are provided with the quill instance and can do whatever you'd do with vanilla quill. This is just a wrapper meant to help integration within a solid application.
 
-Example usage:
+### Example usage
 
 ```tsx
 const App: Component = () => {
   let q: Quill;
 
   onMount(() => {
-    console.log(q)
+    console.log(q);
     // log: undefined
     // This is because the `SolidQuill` component also needs to wait for
     // the element to be mounted to the dom bubbling the reference
     // upward to the parent component.
-  })
+  });
 
   const init = (quill: Quill) => {
     console.assert(q.getText() === quill.getText());
@@ -48,16 +48,13 @@ const App: Component = () => {
     <SolidQuill
       // Bind the `Quill` instance to the parent
       ref={q}
-
       // Which element to create (default to `div`)
       as="main"
-
       // Events
       onReady={init}
       onTextChange={console.log}
       onSelectionChange={console.log}
       onEditorChange={console.log}
-
       // Quill options
       debug={false}
       modules={} // see defaults below
@@ -68,13 +65,26 @@ const App: Component = () => {
       bounds={}
       scrollingContainer={}
       strict={}
-
       // All other props will be attached to the rendered
       // dom element, so you can add classes, styles, w/e
       class="quill"
       style="transform: rotate(90deg)"
-      classList={{ active: true  }}
+      classList={{ active: true }}
     />
+  );
+};
+```
+
+### Listen to text change
+
+```tsx
+import Quill from "quill";
+import { SolidQuill } from "solid-quill";
+
+function App() {
+  let quill: Quill;
+  return (
+    <SolidQuill ref={quill} onTextChange={() => console.log(quill.getText())} />
   );
 }
 ```

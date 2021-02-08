@@ -1,5 +1,5 @@
 import { Dynamic } from "solid-js/web";
-import { assignProps, createEffect, JSX, onMount, splitProps } from "solid-js";
+import { mergeProps, createEffect, JSX, onMount, splitProps } from "solid-js";
 
 import Quill, {
   EditorChangeHandler,
@@ -73,7 +73,7 @@ export function SolidQuill(props: Props) {
   let editorRef!: HTMLElement;
   let quill: Quill;
 
-  const mergedProps = assignProps({ as: "div", ...defaultValues }, props);
+  const mergedProps = mergeProps({ as: "div", ...defaultValues }, props);
 
   const [internal, otherProps] = splitProps(mergedProps, [
     "as",
