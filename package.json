@@ -43,9 +43,10 @@
     "wysiwyg",
     "editor"
   ],
+  "sideEffects": false,
   "peerDependencies": {
     "quill": "^1.3",
-    "solid-js": "^0.23"
+    "solid-js": "^0.24"
   },
   "dependencies": {
     "quill": "^1.3.7",
