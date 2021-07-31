@@ -1,13 +1,14 @@
 import { Dynamic } from "solid-js/web";
 import { mergeProps, createEffect, JSX, onMount, splitProps } from "solid-js";
 
-import {
-  Quill,
+import type {
   EditorChangeHandler,
   QuillOptionsStatic,
   SelectionChangeHandler,
   TextChangeHandler,
 } from "quill";
+
+import Quill from "quill";
 
 function kebabCase(input: string) {
   return input
