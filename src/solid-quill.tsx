@@ -1,7 +1,8 @@
 import { Dynamic } from "solid-js/web";
 import { mergeProps, createEffect, JSX, onMount, splitProps } from "solid-js";
 
-import Quill, {
+import {
+  Quill,
   EditorChangeHandler,
   QuillOptionsStatic,
   SelectionChangeHandler,
