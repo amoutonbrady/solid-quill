@@ -20,6 +20,7 @@
   "types": "dist/types/solid-quill.d.ts",
   "exports": {
     ".": {
+	  "types": "./dist/types/solid-quill.d.ts",
       "solid": "./dist/source/solid-quill.jsx",
       "import": "./dist/esm/solid-quill.js",
       "browser": "./dist/esm/solid-quill.js",
