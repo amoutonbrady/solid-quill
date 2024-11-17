@@ -1,14 +1,10 @@
 import { Dynamic } from "solid-js/web";
 import { mergeProps, createEffect, JSX, onMount, splitProps } from "solid-js";
 
-import type {
-  EditorChangeHandler,
-  QuillOptionsStatic,
-  SelectionChangeHandler,
-  TextChangeHandler,
-} from "quill";
+import type { EmitterSource, QuillOptions } from "quill";
 
 import Quill from "quill";
+import { Delta } from "quill/core";
 
 function kebabCase(input: string) {
   return input
@@ -17,7 +13,7 @@ function kebabCase(input: string) {
     .toLowerCase();
 }
 
-const defaultValues: QuillOptionsStatic = {
+const defaultValues: QuillOptions = {
   theme: "snow",
 
   formats: [
@@ -35,7 +31,6 @@ const defaultValues: QuillOptionsStatic = {
     "video",
     "color",
     "background",
-    "clean",
   ],
 
   modules: {
@@ -60,20 +55,24 @@ const defaultValues: QuillOptionsStatic = {
 };
 
 const events = [
-  "onTextChange",
-  "onSelectionChange",
   "onEditorChange",
-  "onceTextChange",
-  "onceSelectionChange",
-  "onceEditorChange",
-  "offTextChange",
-  "offSelectionChange",
-  "offEditorChange",
+  "onScrollBeforeUpdate",
+  "onScrollBlotMount",
+  "onScrollBlotUnmount",
+  "onScrollOptimize",
+  "onScrollUpdate",
+  "onScrollEmbedUpdate",
+  "onSelectionChange",
+  "onTextChange",
+  "onCompositionBeforeStart",
+  "onCompositionStart",
+  "onCompositionBeforeEnd",
+  "onCompositionEnd",
 ] as const;
 
 export function SolidQuill(props: Props) {
-  let editorRef!: HTMLElement;
   let quill: Quill;
+  let editorRef!: HTMLElement;
 
   const mergedProps = mergeProps({ as: "div", ...defaultValues }, props);
 
@@ -92,8 +91,6 @@ export function SolidQuill(props: Props) {
     "theme",
     "formats",
     "bounds",
-    "scrollingContainer",
-    "strict",
   ]);
 
   onMount(() => {
@@ -130,20 +127,22 @@ export function SolidQuill(props: Props) {
   );
 }
 
-interface Props extends QuillOptionsStatic, JSX.HTMLAttributes<Quill> {
+interface Props extends QuillOptions, JSX.HTMLAttributes<Quill> {
   as?: string;
 
   onReady?: (quill: Quill) => unknown;
 
-  onTextChange?: (handler: TextChangeHandler) => unknown;
-  onSelectionChange?: (handler: SelectionChangeHandler) => unknown;
-  onEditorChange?: (handler: EditorChangeHandler) => unknown;
-
-  onceTextChange?: (handler: TextChangeHandler) => unknown;
-  onceSelectionChange?: (handler: SelectionChangeHandler) => unknown;
-  onceEditorChange?: (handler: EditorChangeHandler) => unknown;
-
-  offTextChange?: (handler: TextChangeHandler) => unknown;
-  offSelectionChange?: (handler: SelectionChangeHandler) => unknown;
-  offEditorChange?: (handler: EditorChangeHandler) => unknown;
+  onEditorChange?: (...args: unknown[]) => unknown;
+  onScrollBeforeUpdate?: (...args: unknown[]) => unknown;
+  onScrollBlotMount?: (...args: unknown[]) => unknown;
+  onScrollBlotUnmount?: (...args: unknown[]) => unknown;
+  onScrollOptimize?: (...args: unknown[]) => unknown;
+  onScrollUpdate?: (...args: unknown[]) => unknown;
+  onScrollEmbedUpdate?: (...args: unknown[]) => unknown;
+  onSelectionChange?: (range: Range, oldRange: Range, source: EmitterSource) => unknown;
+  onTextChange?: (delta: Delta, oldContent: Delta, source: EmitterSource) => unknown;
+  onCompositionBeforeStart?: (...args: unknown[]) => unknown;
+  onCompositionStart?: (...args: unknown[]) => unknown;
+  onCompositionBeforeEnd?: (...args: unknown[]) => unknown;
+  onCompositionEnd?: (...args: unknown[]) => unknown;
 }
